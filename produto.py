@@ -3,14 +3,14 @@ from categoria_produto import CategoriaProduto
 
 class Produto:
 
-    def __init__(self, codigo: int, descricao: str, categoria_produto: CategoriaProduto, quantidade: int, preco_unitario: float, preco_total:float):
+    def __init__(self, codigo: int, descricao: str, categoria_produto: CategoriaProduto):
         self.__codigo = codigo
         self.__descricao = descricao
         self.__categoria_produto = categoria_produto
-        self.__quantidade = quantidade
-        self.__preco_unitario = preco_unitario
-        self.__cliente = []
-        self.__preco_total = preco_total
+        self.__quantidade = 0
+        self.__preco_unitario = 0.0
+        self.__cliente = None
+
 
     @property
     def codigo(self):
@@ -50,7 +50,7 @@ class Produto:
         return self.__preco_unitario
 
     @preco_unitario.setter
-    def preco_unitario(self, preco_unitario):
+    def preco_unitario(self, preco_unitario: float):
         self.__preco_unitario = preco_unitario
 
     @property
@@ -59,14 +59,12 @@ class Produto:
 
     @cliente.setter
     def cliente(self, cliente: Cliente):
-        if isinstance(cliente, Cliente):
-            self.__cliente.append(cliente)
+        self.__cliente = cliente
+
 
     @property
     def preco_total(self):
         return self.__preco_total
 
-    def calcula_preco_total(self):
-        #cada produto possa calcular o seu preço total (quantidade multiplicada pelo preço unitário).
-        self.__preco_total = self.__preco_unitario * self.__quantidade
-
+    def preco_total(self):
+        return self.__preco_unitario * self.__quantidade
